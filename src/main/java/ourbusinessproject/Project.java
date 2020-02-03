@@ -1,9 +1,13 @@
 package ourbusinessproject;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
+@Entity
 public class Project {
 
+    @Id
     @NotEmpty
     private String title;
 

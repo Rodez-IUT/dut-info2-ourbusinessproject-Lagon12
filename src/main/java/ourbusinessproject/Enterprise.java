@@ -1,12 +1,20 @@
 package ourbusinessproject;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+ @Entity
 public class Enterprise {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotEmpty
     private String name;
