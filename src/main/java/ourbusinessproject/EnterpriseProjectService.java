@@ -19,6 +19,7 @@ public class EnterpriseProjectService {
         this.entityManager = entityManager;
     }
 
+    /* Sauvegarde le projet */
     public void save(Project project) {
         entityManager.persist(project);
         entityManager.flush();
