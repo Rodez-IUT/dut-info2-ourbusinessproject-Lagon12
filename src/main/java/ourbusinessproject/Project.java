@@ -1,10 +1,8 @@
 package ourbusinessproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Project {
@@ -18,6 +16,8 @@ public class Project {
 
     private String description;
 
+    @ManyToOne
+    @NotNull
     private Enterprise entreprise;
 
     public Enterprise getEnterprise() {
