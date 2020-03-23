@@ -18,6 +18,16 @@ public class Project {
 
     private String description;
 
+    private Enterprise entreprise;
+
+    public Enterprise getEnterprise() {
+        return entreprise;
+    }
+
+    public void setEnterprise(Enterprise entreprise) {
+        this.entreprise = entreprise;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
