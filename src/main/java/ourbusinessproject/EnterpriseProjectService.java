@@ -21,6 +21,7 @@ public class EnterpriseProjectService {
 
     /* Sauvegarde le projet */
     public void save(Project project) {
+        save(project.getEnterprise());
         entityManager.persist(project);
         entityManager.flush();
     }

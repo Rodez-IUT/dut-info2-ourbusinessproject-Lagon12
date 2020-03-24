@@ -29,7 +29,7 @@ public class Enterprise {
     @Email
     private String contactEmail;
 
-    @OneToMany
+    @OneToMany(mappedBy = "entreprise")
     private Collection<Project> projects;
 
 
@@ -72,4 +72,8 @@ public class Enterprise {
      public Collection<Project> getProjects() {
         return projects;
      }
- }
+
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
+}
