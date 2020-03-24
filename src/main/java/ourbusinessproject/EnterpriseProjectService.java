@@ -4,8 +4,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collection;
-import java.util.HashSet;
 
 @Service
 public class EnterpriseProjectService {
