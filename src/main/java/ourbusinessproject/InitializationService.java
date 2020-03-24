@@ -1,11 +1,18 @@
 package ourbusinessproject;
 
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+
+@Service
 public class InitializationService {
     private Project project1;
     private Project project2;
     private Project project3;
     private Enterprise entreprise1;
     private Enterprise entreprise2;
+    private EnterpriseProjectService enterpriseProjectService;
+
 
     public Project getProject1E1() {
         return project1;
@@ -52,5 +59,11 @@ public class InitializationService {
         entreprise1.addProject(project2);
 
         project3 = new Project("projet 2", "p2", entreprise1);
+
+        enterpriseProjectService.save(entreprise1);
+        enterpriseProjectService.save(entreprise2);
+        enterpriseProjectService.save(project1);
+        enterpriseProjectService.save(project2);
+        enterpriseProjectService.save(project3);
     }
 }

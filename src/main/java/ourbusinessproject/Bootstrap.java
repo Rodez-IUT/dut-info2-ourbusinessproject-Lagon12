@@ -1,8 +1,10 @@
 package ourbusinessproject;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+import javax.annotation.PostConstruct;
+
+@Component
 public class Bootstrap {
 
     private InitializationService service;
@@ -18,9 +20,10 @@ public class Bootstrap {
         return service;
     }
 
-
+    @PostConstruct
     public void init() {
         try {
+            service = new InitializationService();
             service.initProjects();
         } catch(RuntimeException err) {
             System.err.println("ERREUR DE RUNTIME : " + err);
