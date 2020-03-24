@@ -16,6 +16,15 @@ public class Project {
 
     private String description;
 
+    public Project() {
+    }
+
+    public Project(String titre, String description, Enterprise entreprise) {
+        this.title = titre;
+        this.description = description;
+        this.entreprise = entreprise;
+    }
+
     @ManyToOne
     @NotNull
     private Enterprise entreprise;

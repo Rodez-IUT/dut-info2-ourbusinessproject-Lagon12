@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EnterpriseProjectService {
@@ -43,4 +46,9 @@ public class EnterpriseProjectService {
         return entityManager.find(Enterprise.class, anId);
     }
 
+    public List<Project> findAllProjects() {
+        String requete = "SELECT p FROM Project p ORDER BY p.title";
+        TypedQuery<Project> res = entityManager.createQuery(requete, Project.class);
+        return res.getResultList();
+    }
 }
