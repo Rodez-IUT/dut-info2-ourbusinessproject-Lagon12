@@ -5,6 +5,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -75,5 +76,12 @@ public class Enterprise {
 
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
+    }
+
+    public void addProject(Project projet) {
+         if (this.projects == null) {
+             this.projects = new ArrayList<Project>();
+         }
+         this.projects.add(projet);
     }
 }

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Service
 public class EnterpriseProjectService {
@@ -21,7 +23,11 @@ public class EnterpriseProjectService {
 
     /* Sauvegarde le projet */
     public void save(Project project) {
-        save(project.getEnterprise());
+        if (project.getEnterprise() != null) {
+            project.getEnterprise().addProject(project);
+            save(project.getEnterprise());
+        }
+
         entityManager.persist(project);
         entityManager.flush();
     }
