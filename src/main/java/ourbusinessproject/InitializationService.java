@@ -48,7 +48,6 @@ public class InitializationService {
         entreprise1.addProject(project1);
         entreprise2.addProject(project1);
 
-//
         project2 = new Project("projet 2", "p2", entreprise1);
         entreprise1.addProject(project2);
 
