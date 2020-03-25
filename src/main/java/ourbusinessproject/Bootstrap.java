@@ -10,6 +10,7 @@ public class Bootstrap {
     private InitializationService service;
 
     public Bootstrap() {
+        service = new InitializationService();
     }
 
     public Bootstrap(InitializationService initializationService) {
@@ -23,7 +24,6 @@ public class Bootstrap {
     @PostConstruct
     public void init() {
         try {
-            service = new InitializationService();
             service.initProjects();
         } catch(RuntimeException err) {
             System.err.println("ERREUR DE RUNTIME : " + err);

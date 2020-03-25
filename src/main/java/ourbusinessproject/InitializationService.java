@@ -1,29 +1,32 @@
 package ourbusinessproject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class InitializationService {
-    private Project project1;
-    private Project project2;
-    private Project project3;
+    private Project project1E1;
+    private Project project1E2;
+    private Project project2E1;
     private Enterprise entreprise1;
     private Enterprise entreprise2;
+
+    @Autowired
     private EnterpriseProjectService enterpriseProjectService;
 
 
     public Project getProject1E1() {
-        return project1;
+        return project1E1;
     }
 
     public Project getProject1E2() {
-        return project3;
+        return project1E2;
     }
 
     public Project getProject2E1() {
-        return project2;
+        return project2E1;
     }
 
     public Enterprise getEnterprise1() {
@@ -47,23 +50,14 @@ public class InitializationService {
         entreprise2.setContactEmail("entreprise2@com.com");
         entreprise2.setContactName("entreprise2 contact name");
 
-        project1 = new Project();
-        project1.setTitle("projet 1");
-        project1.setDescription("p1");
-        project1.setEnterprise(entreprise1);
+        project1E1 = new Project("projet1E1", "projet1E1 description", entreprise1);
+        project1E2 = new Project("projet1E2", "projet1E2 description", entreprise2);
+        project2E1 = new Project("project2E1", "project2E1 description", entreprise1);
 
-        entreprise1.addProject(project1);
-        entreprise2.addProject(project1);
+        enterpriseProjectService = new EnterpriseProjectService();
 
-        project2 = new Project("projet 2", "p2", entreprise1);
-        entreprise1.addProject(project2);
-
-        project3 = new Project("projet 2", "p2", entreprise1);
-
-        enterpriseProjectService.save(entreprise1);
-        enterpriseProjectService.save(entreprise2);
-        enterpriseProjectService.save(project1);
-        enterpriseProjectService.save(project2);
-        enterpriseProjectService.save(project3);
+        enterpriseProjectService.save(project1E1);
+        enterpriseProjectService.save(project1E2);
+        enterpriseProjectService.save(project2E1);
     }
 }
