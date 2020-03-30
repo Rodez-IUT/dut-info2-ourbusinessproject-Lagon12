@@ -1,40 +1,37 @@
 package ourbusinessproject;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 @Entity
 public class Enterprise {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @NotEmpty
     private String name;
-
-    @NotEmpty
     @Size(min = 10)
     private String description;
-
     @NotEmpty
     private String contactName;
-
-    @NotEmpty
-    @Email
+    @NotEmpty @Email
     private String contactEmail;
 
-    @OneToMany(mappedBy = "entreprise")
+    @OneToMany(mappedBy = "enterprise")
+    @JsonIgnore
     private Collection<Project> projects;
 
-
-     public String getName() {
+    public String getName() {
         return name;
     }
 
@@ -47,7 +44,7 @@ public class Enterprise {
     }
 
     public void setDescription(String description) {
-            this.description = description;
+        this.description = description;
     }
 
     public String getContactName() {
@@ -63,25 +60,18 @@ public class Enterprise {
     }
 
     public void setContactEmail(String contactEmail) {
-           this.contactEmail = contactEmail;
+        this.contactEmail = contactEmail;
     }
 
-     public Long getId() {
-         return id;
-     }
+    public Long getId() {
+        return id;
+    }
 
-     public Collection<Project> getProjects() {
+    public Collection<Project> getProjects() {
         return projects;
-     }
+    }
 
     public void setProjects(Collection<Project> projects) {
         this.projects = projects;
-    }
-
-    public void addProject(Project projet) {
-         if (this.projects == null) {
-             this.projects = new ArrayList<Project>();
-         }
-         this.projects.add(projet);
     }
 }

@@ -11,17 +11,3 @@ public class OurbusinessprojectApplication {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

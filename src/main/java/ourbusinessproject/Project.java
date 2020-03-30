@@ -1,48 +1,42 @@
 package ourbusinessproject;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 
 @Entity
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @NotEmpty
     private String title;
-
     private String description;
 
-    public Project() {
-    }
-
-    public Project(String titre, String description, Enterprise entreprise) {
-        this.title = titre;
-        this.description = description;
-        this.entreprise = entreprise;
-    }
-
-    @ManyToOne
     @NotNull
-    private Enterprise entreprise;
+    @ManyToOne
+    private Enterprise enterprise;
 
-    public Enterprise getEnterprise() {
-        return entreprise;
-    }
+    public Project() {}
 
-    public void setEnterprise(Enterprise entreprise) {
-        this.entreprise = entreprise;
-    }
-
-    public void setTitle(String title) {
+    public Project(String title, String description, Enterprise enterprise) {
         this.title = title;
+        this.description = description;
+        setEnterprise(enterprise);
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
@@ -55,5 +49,22 @@ public class Project {
 
     public Long getId() {
         return id;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        if (this.enterprise != null) {
+            this.enterprise.getProjects().remove(this);
+        }
+        this.enterprise = enterprise;
+        if (this.enterprise != null) {
+            if (this.enterprise.getProjects() == null) {
+                this.enterprise.setProjects(new ArrayList<>());
+            }
+            this.enterprise.getProjects().add(this);
+        }
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
     }
 }
