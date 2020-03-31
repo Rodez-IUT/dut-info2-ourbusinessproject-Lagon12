@@ -3,6 +3,7 @@ package ourbusinessproject;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
+import javax.persistence.JoinColumn;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -40,6 +41,7 @@ public class EnterpriseProjectService {
         return entityManager.find(Enterprise.class, anId);
     }
 
+    @JoinColumn
     public List<Project> findAllProjects() {
         /*
            1 : 2 requêtes identiques sont générées (seul le paramètre change)
@@ -48,7 +50,7 @@ public class EnterpriseProjectService {
            4 : Ces informations ne sont pas retournés dans la première requête
                car il n'y a pas de jointure juste une référence (clé étrangère) aux entreprises dans celle-ci
          */
-        String query = "SELECT p, e FROM Project p JOIN p.enterprise e ORDER BY p.title" ;
+        String query = "SELECT p FROM Project p JOIN FETCH p.enterprise e ORDER BY p.title" ;
         TypedQuery<Project> queryObj = entityManager.createQuery(query,Project.class);
         return queryObj.getResultList();
     }
