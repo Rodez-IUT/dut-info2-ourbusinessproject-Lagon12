@@ -30,6 +30,15 @@ public class InitializationService {
         initAndSaveProject1E2();
         initAndSaveProject2E1();
 
+        /*
+         *  Lorsque qu'une des méthodes échoues ou rencontres une erreur,
+         *  l'ensemble des actions effectuées lors de la transactions sont annulées,
+         *  c'est le principe d'une transaction. Il faut conserver l'intégrité des données.
+         *  Ainsi comme la transactionne ne peut aboutir,
+         *  la base de données et remise dans son état d'origine (au début de la transaction)
+         *  Si la transaction échoue un rollback est effectué sinon un committ
+         */
+
     }
 
     private void initAndSaveProject1E1() {
@@ -41,6 +50,7 @@ public class InitializationService {
     private void initAndSaveProject1E2() {
         project1E2 = new Project("p1e2","p1 e2 description", enterprise2);
         enterpriseProjectService.save(project1E2);
+
         enterprise2 = project1E2.getEnterprise();
     }
 
